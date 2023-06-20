@@ -9,6 +9,28 @@ const useWordle = (solution) => {
     const [isCorrect, setIsCorrect] = useState(false)
     
     const formatGuess= () => {
+        let solutionArray = [...solution]
+        let formattedGuess = [...currentGuess].map((letter)=> {
+            return { key: letter, color: 'grey'}
+        })
+
+        //find any green letter (letter in correct position)
+        formattedGuess.forEach((letter, i)=> {
+            if (solutionArray[i] === letter.key){
+                formattedGuess[i].color= 'green'
+                solutionArray[i] = null
+            }
+        })
+
+        //find any yellow colors
+        formattedGuess.forEach((letter, i) => {
+            if(solutionArray.includes(letter.key) && letter.color !== 'green'){
+                formattedGuess[i].color = 'yellow'
+                solutionArray[solutionArray.indexOf(letter.key)] = null
+            }
+        })
+
+        return formattedGuess
 
     }
 
@@ -17,6 +39,27 @@ const useWordle = (solution) => {
     }
 
     const handleKeyup = ({ key }) => {
+
+        if(key === 'Enter'){
+            //only add guess if turn less than 5
+            if (turn > 5){
+                console.log('you used all guesses')
+                return
+            }
+            // do not allow duplicate words
+            if (history.includes(currentGuess)){
+                console.log('you already have that word')
+                return
+            }
+            //check word is 5 chars long
+            if (currentGuess.length !==5){
+                console.log('word not long enough')
+                return
+            }
+
+            const formatted = formatGuess()
+            console.log(formatted)
+        }
 
         if (key === 'Backspace'){
             setCurrentGuess((prev) => {
@@ -31,6 +74,8 @@ const useWordle = (solution) => {
                 })
             }
         }
+
+
     }
 
     return { turn, currentGuess, guesses, isCorrect, handleKeyup };
