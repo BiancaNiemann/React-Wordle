@@ -77,17 +77,17 @@ const useWordle = (solution) => {
         if(key === 'Enter'){
             //only add guess if turn less than 5
             if (turn > 5){
-                console.log('you used all guesses')
+                alert('you used all guesses')
                 return
             }
             // do not allow duplicate words
             if (history.includes(currentGuess)){
-                console.log('you already have that word')
+                alert('you already have that word')
                 return
             }
             //check word is 5 chars long
             if (currentGuess.length !==5){
-                console.log('word not long enough')
+                alert('word not long enough')
                 return
             }
 
