@@ -8,7 +8,10 @@ const useWordle = (solution) => {
     const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({})
-
+    console.log(currentGuess)
+    console.log(guesses)
+    console.log(history)
+    
     const formatGuess= () => {
         let solutionArray = [...solution]
         let formattedGuess = [...currentGuess].map((letter)=> {
