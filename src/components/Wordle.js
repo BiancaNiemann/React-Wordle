@@ -13,13 +13,13 @@ export default function Wordle({ solution }) {
 
     window.addEventListener('keyup', handleKeyup)
 
-    if (isCorrect){
-      setTimeout(()=> setShowModal(true), 2000)
+    if (isCorrect) {
+      setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
     }
 
-    if (turn > 5){
-      setTimeout(()=> setShowModal(true), 2000)
+    if (turn > 5) {
+      setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyup)
     }
 
@@ -34,9 +34,9 @@ export default function Wordle({ solution }) {
         <p>Blue - Correct letter but wrong place</p>
         <p>Grey - Letter is not in the word</p>
       </div>
-      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn}/>
-      <Keypad usedKeys={usedKeys}/>
-      {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution}/>}
+      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
+      <Keypad usedKeys={usedKeys} />
+      {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} />}
     </>
 
   )
